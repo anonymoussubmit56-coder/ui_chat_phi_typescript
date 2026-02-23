@@ -58,7 +58,7 @@ const FeedbackForm = ({ messages, value, setAttemps, error }: FeedbackFormProps)
       topicRelated,
     };
 
-    const endpoint = connection + "feedback";
+    const endpoint = connection.url + "feedback";
 
     const response = await fetch(endpoint, {
       method: "POST",

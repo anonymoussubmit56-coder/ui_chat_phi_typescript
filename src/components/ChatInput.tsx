@@ -48,11 +48,21 @@ const ChatInput = ({
     }
   };
 
+  const changeAlphaValue = (value: number) => {
+    if (value === 1) return 0.1;
+    if (value === 2) return 0.5;
+    if (value === 3) return 0.9;
+  }
+
+  const changeTauValue = (value: number) => {
+    return value/10;
+  }
+
   const makeRequest = async (prompt: string) => {
     const request = {
       question: prompt,
-      alpha: alpha,
-      tau: tau,
+      alpha: changeAlphaValue(alpha),
+      tau: changeTauValue(tau),
     };
 
     setLoading(true);
