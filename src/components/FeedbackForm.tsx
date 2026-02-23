@@ -180,6 +180,7 @@ const FeedbackForm = ({ messages, value, setAttemps, error }: FeedbackFormProps)
                   onChange={(e) => setQuestion3(e.target.value)}
                 >
                   <option value="">Select an option</option>
+                  <option value="0"> 0 – I do not know / I am not sure.</option>
                   <option value="1">
                     {" "}
                     1 – Severe hallucination (Major libraries/logic are entirely
