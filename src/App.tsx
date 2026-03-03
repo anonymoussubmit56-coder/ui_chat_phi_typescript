@@ -11,6 +11,11 @@ function App() {
   const [addTau, setAddTau] = useState(false);
   const [isShowingMenu, setIsShowingMenu] = useState(true);
   const [testConnection, setTestConnection] = useState(false);
+  const [topicRelated, setTopicRelated] = useState("");
+
+  const [NDCChosedButton, setNDCChosedButton] = useState(false);
+  const [PLChosedButton, setPLChosedButton] = useState(false);
+
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -21,7 +26,7 @@ function App() {
     }
   }, []);
 
-
+  // console.log("topicRelated", topicRelated);
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
@@ -44,13 +49,17 @@ function App() {
         {/* Main content */}
         <main style={{ minWidth: 0 }} className={`w-100 p-4 ${theme === "light" ? "bg-light text-dark" : "bg-dark text-light"}`}>
 
-          {/* <div className="w-100 d-flex flex-column gap-3 mb-5 justify-content-center"> */}
-
           <div className="d-flex flex-column gap-3 mb-5 justify-content-center">
             <Card title="Domain - audience α" theme={theme}>
-              Talking about Programming Languages and EDC
-              <div className={`${theme === "light" ? "bg-warning bg-gradient" : "bg-secondary bg-gradient"} rounded p-3 mt-3`}>
-                <p className={`${theme === "light" ? "text-gray-700" : "text-gray-300"}`}>This model doesn't have memory so it will not remember previous conversations or questions.</p>
+              Talking about Programming Languages and EDC, which one do you want to talk about? This will help the model to adapt its vocabulary and style to better suit your needs and preferences. Please select the topic you want to talk about, and the model will adjust its responses accordingly.
+              <hr className={`bg-${theme === "light" ? "dark" : "light"} border-2 border-top`} />
+              <div className="mb-3">
+                <label htmlFor="topicRelated" className="form-label">Please specify the topic you want to talk about:</label>
+                <br />
+                <label htmlFor="option1" className={NDCChosedButton ? "btn btn-primary mx-2" : "btn btn-outline-primary mx-2"} onClick={() => { setTopicRelated("NDC"); setNDCChosedButton(true); setPLChosedButton(false); }}>NDC</label>
+                <label htmlFor="option2" className={PLChosedButton ? "btn btn-primary mx-2" : "btn btn-outline-primary mx-2"} onClick={() => { setTopicRelated("PL"); setPLChosedButton(true); setNDCChosedButton(false); }}>Programming Languages</label>
+                <input type='radio' className="btn-check" name="options" id="option1" value="NDC" onChange={(e) => setTopicRelated(e.target.value)} />
+                <input type='radio' className="btn-check" name="options" id="option2" autoComplete="off" value="PL" onChange={(e) => setTopicRelated(e.target.value)} />
               </div>
             </Card>
             <div className='d-flex flex-column flex-lg-row gap-3'>
@@ -85,7 +94,7 @@ function App() {
           {/* <hr class="bg-dark border-2 border-top border-secondary" /> */}
 
           <div className="mt-4" style={{ backgroundColor: theme === "light" ? "rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) " : "rgba(var(--bs-dark-rgb), var(--bs-bg-opacity))" }}>
-            <Chat alpha={alpha} tau={tau} theme={theme} />
+            <Chat alpha={alpha} tau={tau} theme={theme} topicRelated={topicRelated} />
           </div>
 
         </main>

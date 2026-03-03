@@ -12,12 +12,14 @@ interface ChatInputProps {
   setError: (value: any) => void;
   error: any;
   theme: string;
+  topicRelated: string;
 }
 
 const ChatInput = ({
   alpha,
   tau,
   error,
+  topicRelated,
   onSend,
   modelResponse,
   setLoading,
@@ -61,6 +63,7 @@ const ChatInput = ({
   const makeRequest = async (prompt: string) => {
     const request = {
       question: prompt,
+      topicRelated: topicRelated,
       alpha: changeAlphaValue(alpha),
       tau: changeTauValue(tau),
     };
@@ -112,7 +115,7 @@ const ChatInput = ({
         <button
           className="btn btn-dark d-flex align-items-center justify-content-center"
           onClick={handleClick}
-          disabled={waitingForResponse}
+          disabled={topicRelated === "" || waitingForResponse || !prompt.trim()}
         >
           ➤
         </button>

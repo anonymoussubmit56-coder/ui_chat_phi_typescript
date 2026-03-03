@@ -90,7 +90,11 @@ const Sidebar = ({
               Add Tau
             </li>
           </ul>
+          <div className={`${theme === "light" ? "bg-warning bg-gradient" : "bg-secondary bg-gradient"} rounded p-3 mt-3`}>
+            <p className={`${theme === "light" ? "text-gray-700" : "text-gray-300"}`}>This model doesn't have memory so it will not remember previous conversations or questions.</p>
+          </div>
         </nav>
+
       )}
     </aside>
   );

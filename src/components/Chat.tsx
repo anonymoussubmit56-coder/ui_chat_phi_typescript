@@ -10,10 +10,11 @@ interface ChatProps {
   theme: string;
   alpha: number;
   tau: number;
+  topicRelated: string;
 }
 
 
-const Chat = ({ theme, alpha, tau }: ChatProps) => {
+const Chat = ({ theme, alpha, tau, topicRelated }: ChatProps) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(false);
   const [attemps, setAttemps] = useState(0);
@@ -35,7 +36,7 @@ const Chat = ({ theme, alpha, tau }: ChatProps) => {
 
   return (
     <div className="d-flex flex-column h-100">
-      <FeedbackForm error={error} messages={messages} setAttemps={setAttemps} value={attemps} />
+      <FeedbackForm topicRelated={topicRelated} error={error} messages={messages} setAttemps={setAttemps} value={attemps} />
 
       <ChatMessages messages={messages} theme={theme} />
       {loading && (
@@ -53,6 +54,7 @@ const Chat = ({ theme, alpha, tau }: ChatProps) => {
         error={error}
         alpha={alpha}
         tau={tau}
+        topicRelated={topicRelated}
       />
     </div>
   );
