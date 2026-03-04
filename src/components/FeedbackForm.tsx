@@ -49,7 +49,7 @@ const FeedbackForm = ({ messages, value, setAttemps, error, topicRelated }: Feed
   }, [value]);
 
   const isStudent = useMemo(() => {
-    return doforLiving === "Undergraduate Student" || doforLiving === "Postgraduate Student";
+    return doforLiving === "Undergraduate Student";
   }, [doforLiving]);
 
   const handleSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
@@ -57,18 +57,18 @@ const FeedbackForm = ({ messages, value, setAttemps, error, topicRelated }: Feed
     // Aquí puedes manejar el envío del formulario, por ejemplo, enviando los datos a un servidor o almacenándolos en el estado
 
     const feedbackData = {
-      messages,
-      error,
-      expertise,
-      doforLiving,
-      student,
-      isStudent,
-      question1,
-      question2,
-      question3,
-      question4,
-      question5,
-      topicRelated
+      messages: messages ?? [],
+      error: error && error.hasOwnProperty('hasError') ? error : { hasError: false, message: "" },
+      expertise: expertise ?? "",
+      doforLiving: doforLiving ?? "",
+      student: student ?? "",
+      isStudent: Boolean(isStudent),
+      question1: question1 ?? "",
+      question2: question2 ?? "",
+      question3: question3 ?? "",
+      question4: question4 ?? "",
+      question5: question5 ?? "",
+      topicRelated: topicRelated ?? ""
     };
 
     const endpoint = connection.url + "feedback";
