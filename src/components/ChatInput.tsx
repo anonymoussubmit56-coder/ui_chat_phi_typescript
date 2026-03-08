@@ -57,7 +57,7 @@ const ChatInput = ({
   }
 
   const changeTauValue = (value: number) => {
-    return value/10;
+    return value / 10;
   }
 
   const makeRequest = async (prompt: string) => {
@@ -72,7 +72,9 @@ const ChatInput = ({
     try {
       const response = await fetch(connection.url + "ask", {
         method: "POST",
-        headers: connection.header,
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(request),
       });
       const data = await response.json();
