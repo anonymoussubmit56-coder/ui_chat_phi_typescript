@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useChat } from "../hooks/useChat";
 import { connection } from "../data/connection";
 import type { KeyboardEvent, Dispatch, SetStateAction } from "react";
 
@@ -7,19 +8,12 @@ interface ChatInputProps {
   modelResponse: (answer: any) => void;
   setLoading: (value: boolean) => void;
   setAttemps: Dispatch<SetStateAction<number>>
-  alpha: number;
-  tau: number;
   setError: (value: any) => void;
   error: any;
-  theme: string;
-  topicRelated: string;
 }
 
 const ChatInput = ({
-  alpha,
-  tau,
   error,
-  topicRelated,
   onSend,
   modelResponse,
   setLoading,
@@ -27,6 +21,10 @@ const ChatInput = ({
   setError
 
 }: ChatInputProps) => {
+
+  const {state} = useChat();
+  const { alpha, tau, topicRelated } = state;
+
   const [prompt, setPrompt] = useState("");
   const [waitingForResponse, setWaitingForResponse] = useState(false);
 

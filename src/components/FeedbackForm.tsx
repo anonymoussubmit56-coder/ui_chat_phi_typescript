@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef, useMemo } from "react";
 import type { Dispatch, SetStateAction, SubmitEvent } from "react";
-
+import { useChat } from "../hooks/useChat";
 import { Modal } from "bootstrap";
 import { connection } from "../data/connection";
 import type { IChatMessage, ErrorData } from "../types";
@@ -10,20 +10,19 @@ interface FeedbackFormProps {
   value: number;
   setAttemps: Dispatch<SetStateAction<number>>;
   error: ErrorData[];
-  topicRelated: string;
 }
 
-const FeedbackForm = ({ messages, value, setAttemps, error, topicRelated }: FeedbackFormProps) => {
+const FeedbackForm = ({ messages, value, setAttemps, error }: FeedbackFormProps) => {
 
   const modalRef = useRef<HTMLDivElement | null>(null);
   const modalInstance = useRef<Modal | null>(null);
 
+  const { state } = useChat();
+  const { consent, is18OrOlder, topicRelated } = state;
+
   const [expertise, setExpertise] = useState("");
-
   const [doforLiving, setDoforLiving] = useState("");
-
   const [student, setStudent] = useState("");
-
   const [question1, setQuestion1] = useState("");
   const [question2, setQuestion2] = useState("");
   const [question3, setQuestion3] = useState("");
@@ -54,9 +53,12 @@ const FeedbackForm = ({ messages, value, setAttemps, error, topicRelated }: Feed
 
   const handleSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Aquí puedes manejar el envío del formulario, por ejemplo, enviando los datos a un servidor o almacenándolos en el estado
+
+    // # Add to backend consent and is18OrOlder
 
     const feedbackData = {
+      consent: consent, 
+      is18OrOlder: is18OrOlder,
       messages: messages ?? [],
       error: error && error.hasOwnProperty('hasError') ? error : { hasError: false, message: "" },
       expertise: expertise ?? "",
@@ -113,35 +115,6 @@ const FeedbackForm = ({ messages, value, setAttemps, error, topicRelated }: Feed
           </div>
           <div className="modal-body">
             <form onSubmit={(e) => handleSubmit(e)}>
-              {/* <div className="mb-3">
-                <label className="form-label">
-                  What topic did you make your question?
-                </label>
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="radio"
-                    name="topicRelated"
-                    id="radioDefault1"
-                    onChange={() => setTopicRelated("Programming Languages")}
-                  />
-                  <label className="form-check-label" htmlFor="radioDefault1">
-                    Programming Languages
-                  </label>
-                </div>
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="radio"
-                    name="topicRelated"
-                    id="radioDefault2"
-                    onChange={() => setTopicRelated("EDC")}
-                  />
-                  <label className="form-check-label" htmlFor="radioDefault2">
-                    EDC
-                  </label>
-                </div>
-              </div> */}
 
               <div className="mb-3">
                 {
