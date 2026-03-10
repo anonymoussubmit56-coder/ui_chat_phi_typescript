@@ -1,14 +1,16 @@
 import { useEffect, useRef } from "react";
 import type { IChatMessage } from "../types";
+import { useChat } from "../hooks/useChat";
 
 interface ChatMessagesProps {
-  theme: string;
   messages: IChatMessage[];
 }
 
-const ChatMessages = ({ theme, messages }: ChatMessagesProps) => {
+const ChatMessages = ({ messages }: ChatMessagesProps) => {
   const bottomRef = useRef<HTMLDivElement | null>(null);
 
+  const {state} = useChat();
+  const { theme } = state;
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });

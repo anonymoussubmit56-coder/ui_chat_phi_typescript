@@ -1,23 +1,19 @@
-import type { Dispatch, SetStateAction } from "react";
+import type { Dispatch } from "react";
 import { connection } from "../data/connection";
+import { useChat } from "../hooks/useChat";
 
-interface SidebarProps {
-  toggleTheme: () => void;
-  theme: string;
-  setAddTau: Dispatch<SetStateAction<boolean>>;
+type SidebarProps = {
   isOpen: boolean;
-  setIsOpen: (value: boolean) => void;
   testConnection: boolean;
+  setIsOpen: Dispatch<boolean>;
+  toggleTheme: () => void;
 }
 
-const Sidebar = ({
-  toggleTheme,
-  theme,
-  setAddTau,
-  isOpen,
-  setIsOpen,
-  testConnection,
-}: SidebarProps) => {
+const Sidebar = ({isOpen, testConnection, setIsOpen, toggleTheme} : SidebarProps) => {
+
+  const {state, dispatch} = useChat();
+  const { theme } = state;
+
   const getRequest = async () => {
     try {
       const response = await fetch(connection.url);
@@ -85,7 +81,7 @@ const Sidebar = ({
             <li
               className="px-3 py-2 rounded sidebar-item"
               role="button"
-              onClick={() => setAddTau((prev) => !prev)}
+              onClick={() => dispatch({ type: "SET_ADD_TAU", payload: { addTau: !state.addTau } })}
             >
               Add Tau
             </li>

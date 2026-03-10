@@ -1,4 +1,14 @@
 
+export type IChatState = {
+    alpha: number;
+    tau: number;
+    theme: string; // light o dark
+    addTau: boolean;
+    topicRelated: string;
+    consent: boolean;
+    is18OrOlder: boolean;
+}
+
 export interface IConnection {
     url: string;
     header: {

@@ -6,15 +6,9 @@ import FeedbackForm from "./FeedbackForm";
 
 import type { Message, ModelAnswer, ErrorData } from "../types";
 
-interface ChatProps {
-  theme: string;
-  alpha: number;
-  tau: number;
-  topicRelated: string;
-}
 
+const Chat = () => {
 
-const Chat = ({ theme, alpha, tau, topicRelated }: ChatProps) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(false);
   const [attemps, setAttemps] = useState(0);
@@ -36,25 +30,21 @@ const Chat = ({ theme, alpha, tau, topicRelated }: ChatProps) => {
 
   return (
     <div className="d-flex flex-column h-100">
-      <FeedbackForm topicRelated={topicRelated} error={error} messages={messages} setAttemps={setAttemps} value={attemps} />
+      <FeedbackForm error={error} messages={messages} setAttemps={setAttemps} value={attemps}/>
 
-      <ChatMessages messages={messages} theme={theme} />
+      <ChatMessages messages={messages} />
       {loading && (
         <div className="d-flex justify-content-center my-2">
           <Spinner />
         </div>
       )}
       <ChatInput
-        theme={theme}
         setLoading={setLoading}
         onSend={handleSend}
         modelResponse={modelResponse}
         setAttemps={setAttemps}
         setError={setError}
         error={error}
-        alpha={alpha}
-        tau={tau}
-        topicRelated={topicRelated}
       />
     </div>
   );
