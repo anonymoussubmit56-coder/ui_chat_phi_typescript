@@ -26,7 +26,7 @@ const Sidebar = ({isOpen, testConnection, setIsOpen, toggleTheme} : SidebarProps
 
   return (
     <aside
-      className={`vh-100 position-relative flex-shrink-0
+      className={`d-none d-md-block vh-100 position-relative flex-shrink-0
         ${theme === "light" ? "bg-secondary-subtle text-dark" : "bg-black text-light"}`}
       style={{
         width: isOpen ? "16rem" : "4rem",
