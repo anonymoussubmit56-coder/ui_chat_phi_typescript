@@ -86,8 +86,6 @@ function Main() {
             </div>
           </div>
 
-          {/* <hr class="bg-dark border-2 border-top border-secondary" /> */}
-
           <div className="mt-4" style={{ backgroundColor: theme === "light" ? "rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) " : "rgba(var(--bs-dark-rgb), var(--bs-bg-opacity))" }}>
             <Chat />
           </div>
