@@ -11,13 +11,8 @@ function Main() {
 
   const { alpha, tau, theme, addTau } = state;
 
-  // const [alpha, setAlpha] = useState(2);
-  // const [tau, setTau] = useState(6);
-  // const [theme, setTheme] = useState("light"); // light o dark
-  // const [addTau, setAddTau] = useState(false);
   const [isShowingMenu, setIsShowingMenu] = useState(true);
   const [testConnection, setTestConnection] = useState(false);
-  // const [topicRelated, setTopicRelated] = useState("");
 
   const [NDCChosedButton, setNDCChosedButton] = useState(false);
   const [PLChosedButton, setPLChosedButton] = useState(false);
@@ -90,8 +85,6 @@ function Main() {
               }
             </div>
           </div>
-
-          {/* <hr class="bg-dark border-2 border-top border-secondary" /> */}
 
           <div className="mt-4" style={{ backgroundColor: theme === "light" ? "rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) " : "rgba(var(--bs-dark-rgb), var(--bs-bg-opacity))" }}>
             <Chat />

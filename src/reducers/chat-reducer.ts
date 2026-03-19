@@ -11,7 +11,7 @@ export type ChatAction = { type: "SET_ALPHA", payload: {alpha: number} } |
 
 export const initialState: IChatState = {
     alpha: 2,
-    tau: 6,
+    tau: 4,
     theme: "light", // light o dark
     addTau: false,
     topicRelated: "",
